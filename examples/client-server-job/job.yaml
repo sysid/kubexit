@@ -1,4 +1,6 @@
 ---
+# kubectl apply -f examples/client-server-job/job.yaml
+# kubectl delete -f examples/client-server-job/job.yaml
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -34,6 +36,7 @@ spec:
             - |
               set -o errexit -o nounset -o pipefail
               apk --no-cache add ca-certificates tzdata curl bash
+              #/kubexit/kubexit sh -c 'for i in 1 2 3 4 5 ; do echo "HT"; sleep 1; done'
               /kubexit/kubexit curl -v --fail http://localhost:80/
           env:
             - name: KUBEXIT_NAME
